@@ -38,16 +38,16 @@ for x in field_names:
     arcpy.management.AddField(TA_Path, x, "text")
 
 # If given primary/alternate field and a turbine ID field add to field names list for cursor
-    if PA_Field != "":
-        field_names.append(PA_Field)
-        q1 = False
-    else:
-        q1 = True
-    if TIDField != "":
-        field_names.append(TIDField)
-        q2 = False
-    else:
-        q2 = True
+if PA_Field != "":
+    field_names.append(PA_Field)
+    q1 = False
+else:
+    q1 = True
+if TIDField != "":
+    field_names.append(TIDField)
+    q2 = False
+else:
+    q2 = True
 
 if OnlyMets == True: #if this is only a MET Tower only shapefile
     with data.UpdateCursor(TA_Path, field_names) as cursor:
@@ -69,6 +69,7 @@ if OnlyMets == True: #if this is only a MET Tower only shapefile
                 cursor.updateRow(row)
 else:
     if (q1, q2) == (False, False): # If there is a TurbineID field and there is a Primary Alternate Field
+        print(field_names)
         with data.UpdateCursor(TA_Path, field_names) as cursor:
             for row in cursor:
                 row[5] = Source
