@@ -31,7 +31,7 @@ Source = arcpy.GetParameterAsText(4)
 OnlyMets = arcpy.GetParameterAsText(5)
 
 # Fields to add
-field_names = ["TURB_NUM", "TURB_NUM2", "TURB_NUM_S", "LAYER", "BLOCK", "SOURCE"]
+field_names = ["TURB_NUM", "TURB_NUM2", "TURB_NUM_S", "LAYER", "BLOCK", "SOURCE","SIZE"]
 
 # Add required fields
 for x in field_names:
@@ -49,7 +49,7 @@ if TIDField != "":
 else:
     q2 = True
 
-if OnlyMets == True: #if this is only a MET Tower only shapefile
+if OnlyMets == "True": #if this is only a MET Tower only shapefile
     with data.UpdateCursor(TA_Path, field_names) as cursor:
         for row in cursor:
             row[5] = Source
